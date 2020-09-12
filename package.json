@@ -1,0 +1,50 @@
+{
+  "name": "tgrok-desktop",
+  "version": "0.1.0",
+  "description": "A minimal Electron application written with Typescript",
+  "scripts": {
+    "lint": "tslint -c tslint.json -p tsconfig.json",
+    "start": "npm run dev && electron ./dist/main.js",
+    "dev": "webpack --mode=development --progress",
+    "prod": "webpack --mode=production --progress --hide-modules",
+    "build": "electron-builder -mwl"
+  },
+  "repository": "https://github.com/electron/electron-quick-start-typescript",
+  "keywords": [
+    "tgrok",
+    "desktop",
+    "tunnel",
+    "typescript"
+  ],
+  "main": "./dist/main.js",
+  "author": "yueyuzhao",
+  "license": "Apache-2.0",
+  "build": {
+    "productName": "Tgrok",
+    "asar": true,
+    "appId": "net.drmer.desktop.tgrok",
+    "directories": {
+      "output": "build"
+    },
+    "files": [
+      "dist/**/*"
+    ]
+  },
+  "devDependencies": {
+    "@types/lowdb": "^1.0.9",
+    "copy-webpack-plugin": "^6.1.0",
+    "electron": "^9.0.4",
+    "electron-builder": "^22.8.0",
+    "tgrok-gui": "git+https://github.com/tgrok/gui.git",
+    "ts-loader": "^8.0.3",
+    "tslint": "^6.1.2",
+    "typescript": "^3.9.7",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-merge": "^5.1.4"
+  },
+  "dependencies": {
+    "lowdb": "^1.0.0",
+    "tgrok": "git+https://github.com/tgrok/tgrok.git"
+  }
+}
