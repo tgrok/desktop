@@ -13,6 +13,8 @@ class Config {
 
   private db: any
 
+  private saving = false
+
   constructor() {
     const adapter = new FileSync(PATH_CONFIG)
     this.db = low(adapter)
@@ -34,7 +36,17 @@ class Config {
   }
 
   public set = (key: string, value: any) => {
+    if (this.saving) {
+      // another process is saving config
+      // retry after 500ms
+      setTimeout(() => {
+        this.set(key, value)
+      }, 500)
+      return
+    }
+    this.saving = true
     this.db.set(key, value).write()
+    this.saving = false
   }
 
   public get = (key: string) => {
