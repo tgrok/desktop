@@ -7,6 +7,9 @@ export default class JsBridge {
   constructor() {
     // bridge tgrok event
     ipcRenderer.on("tgrok", (_, message) => {
+      if (!(window as any).Drmer) {
+        return
+      }
       (window as any).Drmer.events.emit("tgrok", message);
     });
   }

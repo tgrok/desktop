@@ -36,11 +36,6 @@ function createWindow() {
   // uncomment this if you need to debug tgrok-gui
   // win.loadURL("http://localhost:8080/")
 
-  // Open the DevTools.
-  if (isDevelopment) {
-    win.webContents.openDevTools()
-  }
-
   win.on('closed', () => {
     win = null
   })
@@ -75,7 +70,12 @@ app.on('activate', () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', async () => {
   tgrok.debug = true;
-  tgrok.start([])
+  try {
+    tgrok.start([])
+  } catch (e) {
+    // tslint:disable-next-line:no-console
+    console.log(e)
+  }
   createWindow()
 })
 
